@@ -7,7 +7,6 @@ class Scroller {
 
         this.currentSectionIndex = Math.max(currentSectionIndex,0);
 
-        console.log(this.currentSectionIndex);
         this.isThrottled = false;
 
         this.drawNavigation();
