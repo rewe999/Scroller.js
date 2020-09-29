@@ -1,43 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('ready');
 
-    const root = document.querySelector('#root');
-    const sections = document.querySelectorAll('section');
-    let currentSectionIndex = 0;
-    let isThrottled = false;
+    const scroller = new Scroller('#root');
 
-    document.addEventListener('mousewheel', function (event) {
-        if (isThrottled) return;
-        isThrottled = true;
+    document.addEventListener('mousewheel', (event) => scroller.listenScroll(event));
 
-        setTimeout(() => {
-            isThrottled = false;
-        }, 1000);
-
-        const direction = event.wheelDelta < 0 ? 1 : -1;
-
-        scroll(direction);
-    });
-
-    function scrollToCurrentSection() {
-        sections[currentSectionIndex].scrollIntoView({
-            behavior: "smooth",
-            block: "end",
-        });
-    }
-
-    function scroll(direction) {
-        if (direction === 1) {
-            const isLastSection = currentSectionIndex === sections.length - 1;
-            if (isLastSection) return;
-        } else if (direction === -1) {
-            const isFirstSection = currentSectionIndex === 0;
-            if (isFirstSection) return;
-        }
-
-        currentSectionIndex = currentSectionIndex + direction;
-
-        scrollToCurrentSection();
-    }
-
-})
+});
